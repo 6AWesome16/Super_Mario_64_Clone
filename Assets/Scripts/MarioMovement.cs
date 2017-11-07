@@ -6,7 +6,10 @@ public class MarioMovement : MonoBehaviour {
     public float speed = 6f;
     public float jumpSpeed = 8f;
     public float grav = 20f;
-    Vector3 moveDir = Vector3.zero;
+
+	public Transform Mario;
+
+	Vector3 moveDir = Vector3.zero;
     Vector3 previousLoc;
     Vector3 currentLoc;
 	
@@ -24,7 +27,10 @@ public class MarioMovement : MonoBehaviour {
                 moveDir.y = jumpSpeed;
             }
         }
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.position - previousLoc), Time.deltaTime * speed);
+		if (Vector3.Distance (previousLoc, currentLoc) > 0.05f) {
+			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (transform.position - previousLoc), Time.deltaTime * speed);
+		}
+
         moveDir.y -= grav * Time.deltaTime;
         controller.Move(moveDir * Time.deltaTime);
 	}
