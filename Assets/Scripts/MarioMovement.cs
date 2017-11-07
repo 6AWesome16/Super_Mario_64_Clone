@@ -7,7 +7,6 @@ public class MarioMovement : MonoBehaviour {
     public float jumpSpeed = 8f;
     public float grav = 20f;
 
-	public Transform Mario;
 
 	Vector3 moveDir = Vector3.zero;
     Vector3 previousLoc;
