@@ -28,7 +28,7 @@ public class NumberText : MonoBehaviour {
 
 	public int score;
 	public Sprite[] numberImage;
-	public GameObject[] scoreDigits;
+	public GameObject[] scoreDigits; // TODO: this should maybe be "public Image[] scoreDigits" since that's what you actually use
 
 	private char[] convertedScore;
 
@@ -47,6 +47,11 @@ public class NumberText : MonoBehaviour {
 		{
 			int scoreDigit = convertedScore[(convertedScore.Length - 1) - i] - 48;
 			//idk why 48 is the number there.  I have no idea.
+			// 48 means the character offset in the font table? I dunno
+			
+			// TODO: so if you want to make "0"s disappear if they're unused, uh it's a little complicated,
+			// I would just skip it and go back to it later, maybe in a 2-3 weeks when the game is mostly done
+			// and you're doing polish stuff
 			scoreDigits[i].gameObject.GetComponent<Image>().sprite = numberImage[scoreDigit];
 		}
 	}

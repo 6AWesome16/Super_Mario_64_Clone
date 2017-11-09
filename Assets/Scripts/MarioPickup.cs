@@ -14,13 +14,19 @@ public class MarioPickup : MonoBehaviour {
 		gm = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager> ();
 	}
 
+	void Update () {
+
+		CoinManager.GetComponent<NumberText> ().score = gm.CoinCount;
+		// the coin value shown on screen is equal to the CoinCount in the GameManager
+
+	}
+
 	//The Yellow Coins must be tagged as YellowCoin in the inspector
 
 	void OnTriggerEnter (Collider col) {
 		if (col.CompareTag ("YellowCoin")) {
 			Destroy (col.gameObject);
-			gm.CoinCount += 1;
-			CoinManager.GetComponent<NumberText> ().AddScore (1);
+			gm.ActualCoinValue += 1;
 		}
 
 		if (col.CompareTag ("RedCoin")) {
