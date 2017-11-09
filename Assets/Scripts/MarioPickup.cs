@@ -16,7 +16,7 @@ public class MarioPickup : MonoBehaviour {
 
 	//The Yellow Coins must be tagged as YellowCoin in the inspector
 
-	void OnTriggerEnter2D (Collider2D col) {
+	void OnTriggerEnter (Collider col) {
 		if (col.CompareTag ("YellowCoin")) {
 			Destroy (col.gameObject);
 			gm.CoinCount += 1;
