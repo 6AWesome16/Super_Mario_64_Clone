@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour {
 
 	public int globalTimer = 0;
 
+	//I'm confused why these two values would be different.
+	//Needs more comments explaning why the values are different. 
+	 
 	public int ActualCoinValue;
 	// this internally keeps track of the coins that the player has
 	public int CoinCount;
@@ -36,12 +39,14 @@ public class GameManager : MonoBehaviour {
 		
 
 	void Update () {
-
+	
+		//What does this do?
+		
 		globalTimer++;
 		if (globalTimer > 64) {
 			globalTimer = 0;
 		}
-
+		
 		if (CoinCount < ActualCoinValue) {
 			if (globalTimer % 4 == 0) {
 				CoinCount++;
@@ -54,6 +59,7 @@ public class GameManager : MonoBehaviour {
 		//LifeCount currently defined in inspector since nothing can kill Mario
 		//He is immortal.
 
+		//should probably use <= 0 in case he can take >1 damage and go to -1 health
 		if (LifeCount == 0) {
 			//Mario DIES
 		}
