@@ -15,7 +15,7 @@ public class CoinScript : MonoBehaviour {
 
 		if (Physics.Raycast (groundCheck, out groundFound, maxRayDistance)) {
 			// teleport coin to the raycast hit point plus a certain height
-			transform.position = groundFound.point + new Vector3 (0f, 0.6f, 0f);
+			transform.position = groundFound.point + new Vector3 (0f, 1.6f, 0f);
 		}
 
 
