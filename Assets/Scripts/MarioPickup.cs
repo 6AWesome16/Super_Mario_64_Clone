@@ -39,7 +39,11 @@ public class MarioPickup : MonoBehaviour {
 			gm.LifeCount += 1;
 			LifeManager.GetComponent<NumberText> ().AddScore (1);
 		//
-
+		}
+		if (col.CompareTag ("Star")) {
+			Destroy (col.gameObject);
+			StarManager.GetComponent<NumberText> ().AddScore (1);
+			//insert whatever happens when a red coin is obtained
 		}
 
 		//Other types of objects can be tagged using this script
