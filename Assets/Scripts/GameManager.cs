@@ -17,9 +17,13 @@ public class GameManager : MonoBehaviour {
 	//I'm not making three different NumberText scripts.  That would be silly.
 /// </summary>
 
+	public int globalTimer = 0;
+	// global timer!
 
+	public int ActualCoinValue;
+	// this internally keeps track of the coins that the player has
 	public int CoinCount;
-	//This internally keeps track of the coins that the player currently has.
+	//This internally keeps track of the coin value that is shown on screen.
 	public int LifeCount;
 	//This internally keeps track of the lives that the player currently has.
 	public int StarCount;
@@ -33,6 +37,25 @@ public class GameManager : MonoBehaviour {
 		
 
 	void Update () {
+
+		globalTimer++; // increment global timer by 1 every frame
+		// if it's greater than 64, reset to zero
+		if (globalTimer > 64) {
+			globalTimer = 0;
+		}
+
+		// the ActualCoinValue is incremented every time mario picks something up
+		// check out the MarioPickup script for more
+		if (CoinCount < ActualCoinValue) {
+			// every four frames increment the CoinCount by one if it's lower than the ActualCoinValue
+			if (globalTimer % 4 == 0) {
+				CoinCount++;
+			}
+		}
+		// up to the actual coin value
+		if (CoinCount >= ActualCoinValue) {
+			CoinCount = ActualCoinValue;
+		}
 
 		//LifeCount currently defined in inspector since nothing can kill Mario
 		//He is immortal.
