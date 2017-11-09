@@ -17,6 +17,7 @@ public class MarioPickup : MonoBehaviour {
 	void Update () {
 
 		CoinManager.GetComponent<NumberText> ().score = gm.CoinCount;
+		// the coin value shown on screen is equal to the CoinCount in the GameManager
 
 	}
 

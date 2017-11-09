@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 /// </summary>
 
 	public int globalTimer = 0;
+	// global timer!
 
 	public int ActualCoinValue;
 	// this internally keeps track of the coins that the player has
@@ -37,16 +38,21 @@ public class GameManager : MonoBehaviour {
 
 	void Update () {
 
-		globalTimer++;
+		globalTimer++; // increment global timer by 1 every frame
+		// if it's greater than 64, reset to zero
 		if (globalTimer > 64) {
 			globalTimer = 0;
 		}
 
+		// the ActualCoinValue is incremented every time mario picks something up
+		// check out the MarioPickup script for more
 		if (CoinCount < ActualCoinValue) {
+			// every four frames increment the CoinCount by one if it's lower than the ActualCoinValue
 			if (globalTimer % 4 == 0) {
 				CoinCount++;
 			}
 		}
+		// up to the actual coin value
 		if (CoinCount >= ActualCoinValue) {
 			CoinCount = ActualCoinValue;
 		}
