@@ -7,15 +7,20 @@ public class MarioMovement : MonoBehaviour {
     public float jumpSpeed = 8f;
     public float grav = 20f;
 
-	public Transform Mario;
+	public Transform Mario; // TODO: this is unused?
 
+	// TODO: when you have a series of var declarations that are all the same thing, you can do it all in one line
+	// TODO: e.g. "Vector3 moveDir, previousLoc, currentLoc;"
 	Vector3 moveDir = Vector3.zero;
     Vector3 previousLoc;
     Vector3 currentLoc;
 	
 	void Update () {
+		// TODO: write comments!!! why are you doing this? what is it? etc
         previousLoc = currentLoc;
         currentLoc = transform.position;
+		
+		// TODO: write a comment about what this chunk of code is doing
         CharacterController controller = GetComponent<CharacterController>();
         if (controller.isGrounded)
         {
@@ -27,6 +32,7 @@ public class MarioMovement : MonoBehaviour {
                 moveDir.y = jumpSpeed;
             }
         }
+		// TODO: what is this chunk of code doing? why?
 		if (Vector3.Distance (previousLoc, currentLoc) > 0.05f) {
 			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (transform.position - previousLoc), Time.deltaTime * speed);
 		}
