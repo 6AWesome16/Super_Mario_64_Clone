@@ -297,7 +297,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
-  jumpSpeed: 9
+  jumpSpeed: 10
+  airtime: 2
+  gravityForce: 1
   grav: 25
 --- !u!1 &315741877
 GameObject:
@@ -386,7 +388,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: -26.837002, z: 0}
 --- !u!1001 &388130500
 Prefab:
@@ -442,6 +444,10 @@ Prefab:
       propertyPath: StarManager
       value: 
       objectReference: {fileID: 1020412227}
+    - target: {fileID: 4094234681375180, guid: 6ee2c5b1635c7dd48aba55597440395f, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114255163138486562, guid: 6ee2c5b1635c7dd48aba55597440395f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 6ee2c5b1635c7dd48aba55597440395f, type: 2}
@@ -1524,7 +1530,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4922701032184362, guid: 8320b970adba27e4ab1a9d2f74378a76, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4922701032184362, guid: 8320b970adba27e4ab1a9d2f74378a76, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
