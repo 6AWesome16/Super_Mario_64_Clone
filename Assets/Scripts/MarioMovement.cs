@@ -46,4 +46,3 @@ public class MarioMovement : MonoBehaviour {
 	//        transform.Rotate(0f, 360f * Time.deltaTime, 0f);
 	//    }
 	// }
-

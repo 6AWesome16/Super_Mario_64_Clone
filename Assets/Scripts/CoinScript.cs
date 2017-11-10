@@ -9,7 +9,7 @@ public class CoinScript : MonoBehaviour {
 	void Start () {
 
 		Ray groundCheck = new Ray (transform.position, Vector3.down);
-		float maxRayDistance = 6.0f;
+		float maxRayDistance = Mathf.Infinity;
 		Debug.DrawRay (groundCheck.origin, groundCheck.direction * maxRayDistance, Color.yellow);
 		RaycastHit groundFound = new RaycastHit ();
 
