@@ -9,14 +9,25 @@ public class MarioPickup : MonoBehaviour {
 	public GameObject LifeManager;
 	public GameObject StarManager;
 
+	public AudioClip coin;
+
+/// <summary>
+	// Mario picks lots of stuff up using this script.
+	// Things must be tagged in the inspector for Mario's pickup to work!
+
+	// For some reason, Mario controls the coin sound.  It's the only way I know it will work.
+	// If we need to change it later, we can!
+/// </summary>
+
 
 	void Start () {
-		gm = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager> ();
+		//The Game Manager NEEDS to be tagged as GameController
+		gm = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager> ();	
 	}
 
 	void Update () {
-
 		CoinManager.GetComponent<NumberText> ().score = gm.CoinCount;
+
 		// the coin value shown on screen is equal to the CoinCount in the GameManager
 
 	}
@@ -25,6 +36,10 @@ public class MarioPickup : MonoBehaviour {
 
 	void OnTriggerEnter (Collider col) {
 		if (col.CompareTag ("YellowCoin")) {
+			AudioSource ourAudio = GetComponent<AudioSource> ();
+
+			//Right now Mario's Audio Source controls the coin sound. That's weird.
+			ourAudio.PlayOneShot (coin);
 			Destroy (col.gameObject);
 			gm.ActualCoinValue += 1;
 		}
@@ -48,4 +63,5 @@ public class MarioPickup : MonoBehaviour {
 
 		//Other types of objects can be tagged using this script
 	}
+		
 }

@@ -54,4 +54,5 @@ MonoBehaviour:
   normalCoin: {fileID: 4481774428882600, guid: e33a1cecce2650645bd17979929ba3a6, type: 2}
   floatingCoin: {fileID: 4998781707501452, guid: f9e8f2b6115ba6546b21a94b1e1fe478,
     type: 2}
-  spawnType: 2
+  mario: {fileID: 4401611290496838, guid: 6ee2c5b1635c7dd48aba55597440395f, type: 2}
+  myCurrentType: 0
