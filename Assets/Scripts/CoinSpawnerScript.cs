@@ -103,15 +103,15 @@ public class CoinSpawnerScript : MonoBehaviour {
 
 		// lod script
 		// if distance to mario is beyond a certain level check all of the children (coins) and turn off mesh renderer
-		if (Vector3.Distance (transform.position, mario.position) >= 20f) {
-			foreach (MeshRenderer r in GetComponentsInChildren(typeof(MeshRenderer))) {
-				r.enabled = false;
-			}
-		} else {
-			foreach (MeshRenderer r in GetComponentsInChildren(typeof(MeshRenderer))) {
-				r.enabled = true;
-			}
-		}
+//		if (Vector3.Distance (transform.position, mario.position) >= 20f) {
+//			foreach (MeshRenderer r in GetComponentsInChildren(typeof(MeshRenderer))) {
+//				r.enabled = false;
+//			}
+//		} else {
+//			foreach (MeshRenderer r in GetComponentsInChildren(typeof(MeshRenderer))) {
+//				r.enabled = true;
+//			}
+//		}
 		
 	}
 }
