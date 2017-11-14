@@ -989,7 +989,6 @@ MonoBehaviour:
   speed: 6
   jumpSpeed: 8
   grav: 20
-  Mario: {fileID: 4401611290496838}
 --- !u!114 &114620654522720400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1001,9 +1000,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0eb913a4af5c44ebf14bc083c61309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoinManager: {fileID: 0}
-  LifeManager: {fileID: 0}
-  StarManager: {fileID: 0}
+  CoinManager: {fileID: 1820056348730268, guid: 299074180b9dd24429982e1ef738af8f,
+    type: 2}
+  LifeManager: {fileID: 1207600930891974, guid: 299074180b9dd24429982e1ef738af8f,
+    type: 2}
+  StarManager: {fileID: 1435908797395436, guid: 299074180b9dd24429982e1ef738af8f,
+    type: 2}
 --- !u!143 &143195104095563394
 CharacterController:
   m_ObjectHideFlags: 1

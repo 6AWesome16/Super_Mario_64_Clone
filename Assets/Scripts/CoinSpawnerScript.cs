@@ -7,6 +7,8 @@ public class CoinSpawnerScript : MonoBehaviour {
 	public Transform normalCoin;
 	public Transform floatingCoin;
 
+	public Transform mario; // assign in Inspector!
+
 	public enum SpawnerType {
 		SingleGrounded,
 		SingleFloating,
@@ -98,6 +100,18 @@ public class CoinSpawnerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		// lod script
+		// if distance to mario is beyond a certain level check all of the children (coins) and turn off mesh renderer
+//		if (Vector3.Distance (transform.position, mario.position) >= 20f) {
+//			foreach (MeshRenderer r in GetComponentsInChildren(typeof(MeshRenderer))) {
+//				r.enabled = false;
+//			}
+//		} else {
+//			foreach (MeshRenderer r in GetComponentsInChildren(typeof(MeshRenderer))) {
+//				r.enabled = true;
+//			}
+//		}
 		
 	}
 }

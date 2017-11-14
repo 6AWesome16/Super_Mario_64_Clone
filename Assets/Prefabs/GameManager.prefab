@@ -56,5 +56,7 @@ MonoBehaviour:
   CoinCount: 0
   LifeCount: 0
   StarCount: 0
-  LifeManager: {fileID: 0}
-  StarManager: {fileID: 0}
+  LifeManager: {fileID: 1207600930891974, guid: 299074180b9dd24429982e1ef738af8f,
+    type: 2}
+  StarManager: {fileID: 1435908797395436, guid: 299074180b9dd24429982e1ef738af8f,
+    type: 2}
