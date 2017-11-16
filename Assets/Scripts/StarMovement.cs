@@ -43,23 +43,23 @@ public class StarMovement : MonoBehaviour {
 		float fracJourney = distCovered / journeyLength;
 		if ((Vector3.Distance (parentCube.position, firstStop.position) >= 1) && firstMoveHappened == false) {
 			parentCube.position = Vector3.Lerp (parentCube.position, firstStop.position, fracJourney);
-			Debug.Log ("god this is annoying");
+		//	Debug.Log ("god this is annoying");
 		} else if (Vector3.Distance (parentCube.position, firstStop.position) <= 2) {
 			firstMoveHappened = true;
 		}
 		if (firstMoveHappened && secondMoveHappened == false) {
 			parentCube.position = Vector3.Lerp (parentCube.position, secondStop.position, fracJourney *0.4f);
-			Debug.Log ("asdlkfjsa");
+			//Debug.Log ("asdlkfjsa");
 		} if (Vector3.Distance (parentCube.position, secondStop.position) <= 2) {
 			secondMoveHappened = true;
 		} if (secondMoveHappened && thirdMoveHappened == false) {
 			parentCube.position = Vector3.Lerp (parentCube.position, thirdStop.position, fracJourney *0.4f);
-			Debug.Log ("heyyyyy its the third one");
+			//Debug.Log ("heyyyyy its the third one");
 		} if (Vector3.Distance (parentCube.position, thirdStop.position) <= 2) {
 			thirdMoveHappened = true;
 		} if (thirdMoveHappened) {
 			parentCube.position = Vector3.Lerp (parentCube.position, fourthStop.position, fracJourney * 0.4f);
-			Debug.Log ("fourth");
+			//Debug.Log ("fourth");
 		}
 //		if (((parentCube.position.x <= firstMove.x - 1) || (parentCube.position.y <= firstMove.y - 1)) && firstMoveHappened == false) {
 //			Debug.Log ("first part here");
