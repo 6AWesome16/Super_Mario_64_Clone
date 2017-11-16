@@ -2,47 +2,82 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarioMovement : MonoBehaviour {
+public class MarioMovement : MonoBehaviour
+{
+    public float distToGround = 1f;
+    public float forcePow;
+    public float speed = 6f;
+    public float jumpSpeed = 8f;
+    public float grav = 20f;
+    public float turnSpeed;
+    Rigidbody rb;
+    Vector3 inputVector;
+    //Vector3 moveDir = Vector3.zero;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        
+    }
 
-	public float speed = 6f;
-	public float jumpSpeed = 8f;
+    bool isGrounded()
+    {
+        Debug.DrawRay(transform.position, Vector3.down * distToGround,Color.cyan);
+        return Physics.Raycast(transform.position, Vector3.down, distToGround);
+    }
 
-	public float grav = 20f;
+    void Update()
+    {
+        Debug.Log(isGrounded());
+        if (isGrounded())
+        {
+            //float inputH = Input.GetAxis("Horizontal");
+            float inputV = Input.GetAxis("Vertical");
+            float rotate = Input.GetAxis("Horizontal") * Time.deltaTime * turnSpeed;
+            //should rotate mario
+            transform.Rotate(0, rotate, 0);
 
-	Vector3 moveDir = Vector3.zero;
-	Vector3 previousLoc;
-	Vector3 currentLoc;
+            inputVector = new Vector3(0f, 0f, inputV);
 
-	void Update () {
-		
-		var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
-	        //var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
+            if (inputVector.magnitude > 1f)
+            {
+                inputVector = Vector3.Normalize(inputVector);
+            }
 
-	       transform.Rotate(0, x, 0);
-           previousLoc = currentLoc;
-		          currentLoc = transform.position;
-		           CharacterController controller = GetComponent<CharacterController>();
-
-		           if (controller.isGrounded)
-			           {
-			               moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-			              moveDir = transform.TransformDirection(moveDir);
-			               moveDir *= speed;
-			              if (Input.GetKeyDown(KeyCode.Space))
-			              {
-				                 moveDir.y = jumpSpeed;
-				              }
-			        }
-		moveDir.y -= grav * Time.deltaTime;
-		controller.Move (moveDir * Time.deltaTime);
-	}
+            if (Input.GetKey(KeyCode.Space))
+            {
+                inputVector.y = jumpSpeed;
+            }
+        }
+        if (!isGrounded())
+        {
+            inputVector = new Vector3(0, 0, 0);
+        }
+    }
+    void FixedUpdate()
+    {
+        //should move mario forward
+        rb.AddForce(transform.TransformDirection(inputVector) * forcePow);
+    }
 }
-	
-	//glitchy turning code. keeping just in case. originally from update
-	//	if (Vector3.Distance (previousLoc, currentLoc) > 0.05f)  {
-	//       if (Input.GetKey(KeyCode.S))
-	//      {
-	//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.position - previousLoc), Time.deltaTime);
-	//        transform.Rotate(0f, 360f * Time.deltaTime, 0f);
-	//    }
-	// }
+    //var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
+
+    //transform.Rotate(0, x, 0);
+
+    //CharacterController controller = GetComponent<CharacterController>();
+    //if (controller.isGrounded)
+    //{
+    //   moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+    //movedir is being influenced by the x on the joystick and the x that is rotating him
+
+    //    moveDir = transform.TransformDirection(moveDir);
+    //    moveDir *= speed;
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        moveDir.y = jumpSpeed;                
+    //    }
+    //}
+    //moveDir.y -= grav * Time.deltaTime;
+    //controller.Move (moveDir * Time.deltaTime);
+
+

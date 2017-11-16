@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class LakituCamera : MonoBehaviour {
 
-	//The LakituCamera needs to be parented 
-
-
 	float inputX;
 	float inputZ;
 
