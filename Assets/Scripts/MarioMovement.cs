@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Problems:
+//marios force gets added to his jump, if he doesn't have momentum he can't jump anywhere
+//I want to limit mario's velocity past a certain point
 public class MarioMovement : MonoBehaviour
 {
-    public float distToGround = 1f;
+    public float distToGround = 2f;
+    //forcePow is the speed mario can reach
     public float forcePow;
-    public float speed = 6f;
     public float jumpSpeed = 8f;
-    public float grav = 20f;
     public float turnSpeed;
     Rigidbody rb;
     Vector3 inputVector;
-    //Vector3 moveDir = Vector3.zero;
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -21,8 +24,13 @@ public class MarioMovement : MonoBehaviour
 
     bool isGrounded()
     {
-        Debug.DrawRay(transform.position, Vector3.down * distToGround,Color.cyan);
-        return Physics.Raycast(transform.position, Vector3.down, distToGround);
+        //Debug.DrawRay(transform.position, Vector3.down * distToGround,Color.cyan);
+        //return Physics.Raycast(transform.position, Vector3.down, distToGround);
+        RaycastHit marioRayHit = new RaycastHit();
+        //spherecast has origin point, radius, direction, out hit, max distance
+        //these values specifically keep mario from getting stuck on corners
+        //*please do not mess with them*
+        return Physics.SphereCast(transform.position + new Vector3(0, 1f,0), 1f, Vector3.down, out marioRayHit,distToGround);
     }
 
     void Update()
@@ -30,24 +38,31 @@ public class MarioMovement : MonoBehaviour
         Debug.Log(isGrounded());
         if (isGrounded())
         {
-            //float inputH = Input.GetAxis("Horizontal");
+            //inputV goes between 0 and 1, goes up when held down, goes down when lifted
             float inputV = Input.GetAxis("Vertical");
+            //rotate goes between 0 and 1 multiplied by time.deltatime. multiplying by turnspeed increases turning speed
             float rotate = Input.GetAxis("Horizontal") * Time.deltaTime * turnSpeed;
-            //should rotate mario
+            
+            //should rotate mario at rate of rotate
             transform.Rotate(0, rotate, 0);
 
+            //inputVector takes inputV
             inputVector = new Vector3(0f, 0f, inputV);
 
+            //normalizes inputVector, avoids diagonal movement exploit
             if (inputVector.magnitude > 1f)
             {
                 inputVector = Vector3.Normalize(inputVector);
             }
 
+            //changes y of inputVector to jump at rate of jumpSpeed
             if (Input.GetKey(KeyCode.Space))
             {
                 inputVector.y = jumpSpeed;
             }
         }
+        //if mario isn't grounded, set inputVector to 0, stops him from moving in midair
+        //glitchy on corners, mario can get stuck
         if (!isGrounded())
         {
             inputVector = new Vector3(0, 0, 0);
@@ -55,29 +70,22 @@ public class MarioMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        //should move mario forward
-        rb.AddForce(transform.TransformDirection(inputVector) * forcePow);
+        //should move mario forward at the rate of forcePow
+        //adds force to forward, but I want it to add force for wherever he is facing
+        //rb.AddForce(transform.TransformDirection(inputVector) * forcePow);
+        //this is where the jump problem occurs. it multiplies the jumpspeed by forcepow when jumping
+        //rb.AddRelativeForce(inputVector * forcePow);
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.AddRelativeForce(inputVector * forcePow);
+        }
+        else if(!Input.GetKey(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
+        {
+            rb.AddRelativeForce(inputVector * forcePow);
+        }
+        Debug.Log(inputVector*forcePow);
     }
 }
-    //var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
-
-    //transform.Rotate(0, x, 0);
-
-    //CharacterController controller = GetComponent<CharacterController>();
-    //if (controller.isGrounded)
-    //{
-    //   moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-    //movedir is being influenced by the x on the joystick and the x that is rotating him
-
-    //    moveDir = transform.TransformDirection(moveDir);
-    //    moveDir *= speed;
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        moveDir.y = jumpSpeed;                
-    //    }
-    //}
-    //moveDir.y -= grav * Time.deltaTime;
-    //controller.Move (moveDir * Time.deltaTime);
 
 
