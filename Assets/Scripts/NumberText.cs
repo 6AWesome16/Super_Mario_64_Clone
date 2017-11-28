@@ -34,7 +34,7 @@ public class NumberText : MonoBehaviour {
 
 	void Start()
 	{
-		score = 0;
+
 		//The score value is what gets fed through to the convertedScore
 	}
 
