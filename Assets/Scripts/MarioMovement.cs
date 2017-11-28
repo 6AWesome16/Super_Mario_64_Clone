@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Problems:
-//marios force gets added to his jump, if he doesn't have momentum he can't jump anywhere
 //I want to limit mario's velocity past a certain point
+//mario's not great with hills
 public class MarioMovement : MonoBehaviour
 {
     public float distToGround = 2f;
