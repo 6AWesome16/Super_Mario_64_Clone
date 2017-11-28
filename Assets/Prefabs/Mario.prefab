@@ -475,6 +475,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1842446472963284}
+
   m_LocalRotation: {x: 0, y: 0.6755903, z: -0, w: -0.73727727}
   m_LocalPosition: {x: 149.37393, y: -71.0158, z: 143.21469}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1037,8 +1038,8 @@ Rigidbody:
   m_GameObject: {fileID: 1842446472963284}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1170,7 +1171,7 @@ MonoBehaviour:
   forcePow: 60
   jumpSpeed: 300
   turnSpeed: 100
-  maxSpeed: 30
+  maxSpeed: 25
 --- !u!114 &114300831905649884
 MonoBehaviour:
   m_ObjectHideFlags: 1
