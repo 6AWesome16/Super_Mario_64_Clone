@@ -7,12 +7,20 @@ public class GoombaMovement : MonoBehaviour {
 	Rigidbody goombaRigidBody; // assigned in Start
 
 	bool isWalkCoroutineRunning = false;
-	bool isJumpCoroutineRunning = false;
+	bool isTurnCoroutineRunning = false;
+	bool isAlertedCoroutineRunning = false;
 	bool isDeathCoroutineRunning = false;
+	bool isDashCoroutineRunning = false;
+
+	public Transform mario; // set in inspector
+
+	public bool marioSighted = false; // this toggles when the goombamariodiscover script notices mario
 
 	public enum goombaState{
 		walking,
-		jumping,
+		turning,
+		alerted,
+		dash,
 		dying
 	}
 
@@ -29,11 +37,18 @@ public class GoombaMovement : MonoBehaviour {
 	void Update () {
 
 		if (myGoombaState == goombaState.walking) {
+			// always move forward if in walking state
 			transform.Translate (Time.deltaTime, 0f, 0f);
 			StartCoroutine (goombaWalkingCoroutine ());
 		}
-		if (myGoombaState == goombaState.jumping) {
-			StartCoroutine (goombaJumpCoroutine ());
+		if (myGoombaState == goombaState.turning) {
+			StartCoroutine (goombaTurnCoroutine ());
+		}
+		if (myGoombaState == goombaState.alerted) {
+			StartCoroutine (goombaAlertedCoroutine ());
+		}
+		if (myGoombaState == goombaState.dash) {
+			StartCoroutine (goombaDashCoroutine ());
 		}
 		if (myGoombaState == goombaState.dying) {
 			StartCoroutine (goombaDeathCoroutine ());
@@ -49,30 +64,41 @@ public class GoombaMovement : MonoBehaviour {
 
 		isWalkCoroutineRunning = true;
 
+		// randomly check to jump every second
 		yield return new WaitForSeconds (1f);
 		if (Random.Range (0, 5) == 1) {
-			myGoombaState = goombaState.jumping;
+			myGoombaState = goombaState.turning;
+		}
+
+		// switch to alerted state if mario is seen! (from the goombamariodiscover script
+		if (marioSighted == true) {
+			// jump up
+			goombaRigidBody.velocity += new Vector3 (0f, 15f, 0f);
+
+			myGoombaState = goombaState.alerted;
+			marioSighted = false;
+			yield break;
 		}
 
 		isWalkCoroutineRunning = false;
 
 	}
 
-	IEnumerator goombaJumpCoroutine(){
+	IEnumerator goombaTurnCoroutine(){
 
-		if (isJumpCoroutineRunning == true) {
+		if (isTurnCoroutineRunning == true) {
 			yield break;
 		}
 
-		isJumpCoroutineRunning = true;
+		isTurnCoroutineRunning = true;
 
-		goombaRigidBody.velocity += new Vector3 (0f, 10f, 0f);
-		yield return new WaitForSeconds (0.1f);
+		// rotate randomly over a little time
 		float t = 0f;
 		float randRotate = Random.Range (-180f, 180f);
 		while (t < 0.5f) {
 			t += Time.deltaTime;
 			transform.Rotate (0f, randRotate * Time.deltaTime, 0f);
+			transform.Translate (Time.deltaTime, 0f, 0f); // keep moving forward while turning
 			yield return 0;
 		}
 
@@ -80,7 +106,56 @@ public class GoombaMovement : MonoBehaviour {
 
 		yield return new WaitForSeconds (1f);
 
-		isJumpCoroutineRunning = false;
+		isTurnCoroutineRunning = false;
+
+	}
+
+	IEnumerator goombaAlertedCoroutine(){
+		if (isAlertedCoroutineRunning == true) {
+			yield break;
+		}
+
+		isAlertedCoroutineRunning = true;
+
+		// what should happen here is that the goomba should turn towards mario
+		// and then stop after 0.5 seconds
+		// and switch to dash state
+
+		// instead it gets stuck and never stops turning towards mario
+		float t = 0f;
+		while (t < 0.5f) {
+			Vector3 fromGoombaToMario = mario.position - transform.position; // figure out distance between
+			Quaternion targetRotation = Quaternion.LookRotation (-fromGoombaToMario); // set target rotation
+			transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, Time.deltaTime * 4f); // rotate towards target
+			yield return 0;
+		}
+		myGoombaState = goombaState.dash;
+
+		yield return new WaitForSeconds (5f);
+
+		isAlertedCoroutineRunning = false;
+
+	}
+
+	IEnumerator goombaDashCoroutine(){
+		if (isDashCoroutineRunning == true) {
+			yield break;
+		}
+
+		isDashCoroutineRunning = true;
+
+		// move forward quickly and then switch to walk state
+		float t = 0f;
+		while (t < 2f) {
+			t += Time.deltaTime;
+			transform.Translate (4 * Time.deltaTime, 0f, 0f); // dash forward
+			yield return 0;
+		}
+		yield return new WaitForSeconds (2f);
+
+		myGoombaState = goombaState.walking;
+
+		isDashCoroutineRunning = false;
 
 	}
 
@@ -92,6 +167,7 @@ public class GoombaMovement : MonoBehaviour {
 
 		isDeathCoroutineRunning = true;
 
+		// flatten self when killed
 		float t = 0f;
 		while (t < 0.5f) {
 			t += Time.deltaTime;
@@ -106,10 +182,12 @@ public class GoombaMovement : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collision) {
 
+		// placeholder if mario's feet hitbox hits the goomba then kill
+		// obsolete now please make a way to kill goombas by triggering this
+
 		if (collision.gameObject.name == "MarioFeetHitbox") {
 			myGoombaState = goombaState.dying;
 		}
-
 	}
 
 
