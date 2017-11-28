@@ -34,6 +34,7 @@ public class MarioMovement : MonoBehaviour
         //these values specifically keep mario from getting stuck on corners
         //*please do not mess with them*
         return Physics.SphereCast(transform.position + new Vector3(0, 1f,0), 1f, Vector3.down, out marioRayHit,distToGround);
+        //use this line of code to check for the seesaw
     }
 
     void Update()
@@ -92,7 +93,7 @@ public class MarioMovement : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, ySpeed, rb.velocity.z);
         }
        
-        Debug.Log(inputVector*forcePow);
+        //Debug.Log(inputVector*forcePow);
     }
 }
 
