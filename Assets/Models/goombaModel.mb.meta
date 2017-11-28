@@ -1,75 +1,22 @@
 fileFormatVersion: 2
-guid: 37fa7a0388bfd264d80ae4f5b00bb3fc
-timeCreated: 1509669102
+guid: 8e271c0a7a07aa54cbafd91d5651dc66
+timeCreated: 1511565214
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
-    100002: pCylinder1
-    100004: pCylinder2
-    100006: pSphere1
-    100008: pSphere11
-    100010: pSphere12
-    100012: pSphere13
-    100014: pSphere2
-    100016: pSphere3
-    100018: pSphere5
-    100020: pSphere6
-    100022: pSphere7
-    100024: pSphere8
-    100026: pSphere9
-    100028: transform1
-    100030: transform2
+    100002: pSphere2
+    100004: pSphere3
     400000: //RootNode
-    400002: pCylinder1
-    400004: pCylinder2
-    400006: pSphere1
-    400008: pSphere11
-    400010: pSphere12
-    400012: pSphere13
-    400014: pSphere2
-    400016: pSphere3
-    400018: pSphere5
-    400020: pSphere6
-    400022: pSphere7
-    400024: pSphere8
-    400026: pSphere9
-    400028: transform1
-    400030: transform2
-    2300000: pCylinder1
-    2300002: pCylinder2
-    2300004: pSphere1
-    2300006: pSphere13
-    2300008: pSphere2
-    2300010: pSphere3
-    2300012: pSphere5
-    2300014: pSphere6
-    2300016: pSphere7
-    2300018: pSphere8
-    2300020: pSphere9
-    3300000: pCylinder1
-    3300002: pCylinder2
-    3300004: pSphere1
-    3300006: pSphere13
-    3300008: pSphere2
-    3300010: pSphere3
-    3300012: pSphere5
-    3300014: pSphere6
-    3300016: pSphere7
-    3300018: pSphere8
-    3300020: pSphere9
-    4300000: pSphere1
-    4300002: pSphere2
-    4300004: pSphere3
-    4300006: pSphere5
-    4300008: pSphere6
-    4300010: pSphere7
-    4300012: pSphere8
-    4300014: pSphere9
-    4300016: pCylinder1
-    4300018: pCylinder2
-    4300020: pSphere13
+    400002: pSphere2
+    400004: pSphere3
+    2300000: pSphere2
+    2300002: pSphere3
+    3300000: pSphere2
+    3300002: pSphere3
+    4300000: pSphere2
+    4300002: pSphere3
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -98,7 +45,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.6
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -115,7 +62,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

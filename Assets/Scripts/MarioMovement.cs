@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Problems:
-//marios force gets added to his jump, if he doesn't have momentum he can't jump anywhere
 //I want to limit mario's velocity past a certain point
+//mario's not great with hills
 public class MarioMovement : MonoBehaviour
 {
     public float distToGround = 2f;
@@ -12,6 +12,9 @@ public class MarioMovement : MonoBehaviour
     public float forcePow;
     public float jumpSpeed = 8f;
     public float turnSpeed;
+    public float maxSpeed = 30f;
+    float jumptimer = .5f;
+    float jumptime = .5f;
     Rigidbody rb;
     Vector3 inputVector;
     
@@ -19,7 +22,7 @@ public class MarioMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+        jumptimer = jumptime;
     }
 
     bool isGrounded()
@@ -31,6 +34,7 @@ public class MarioMovement : MonoBehaviour
         //these values specifically keep mario from getting stuck on corners
         //*please do not mess with them*
         return Physics.SphereCast(transform.position + new Vector3(0, 1f,0), 1f, Vector3.down, out marioRayHit,distToGround);
+        //use this line of code to check for the seesaw
     }
 
     void Update()
@@ -38,6 +42,9 @@ public class MarioMovement : MonoBehaviour
         Debug.Log(isGrounded());
         if (isGrounded())
         {
+            jumptimer = jumptime;
+
+
             //inputV goes between 0 and 1, goes up when held down, goes down when lifted
             float inputV = Input.GetAxis("Vertical");
             //rotate goes between 0 and 1 multiplied by time.deltatime. multiplying by turnspeed increases turning speed
@@ -55,6 +62,8 @@ public class MarioMovement : MonoBehaviour
                 inputVector = Vector3.Normalize(inputVector);
             }
 
+            inputVector *= forcePow;
+
             //changes y of inputVector to jump at rate of jumpSpeed
             if (Input.GetKey(KeyCode.Space))
             {
@@ -62,29 +71,29 @@ public class MarioMovement : MonoBehaviour
             }
         }
         //if mario isn't grounded, set inputVector to 0, stops him from moving in midair
-        //glitchy on corners, mario can get stuck
         if (!isGrounded())
         {
             inputVector = new Vector3(0, 0, 0);
+            jumptimer -= .1f;
+            if(jumptimer > 0 && Input.GetKey(KeyCode.Space))
+            {
+                inputVector.y = jumpSpeed / 3f;
+            }
         }
     }
     void FixedUpdate()
     {
         //should move mario forward at the rate of forcePow
         //adds force to forward, but I want it to add force for wherever he is facing
-        //rb.AddForce(transform.TransformDirection(inputVector) * forcePow);
-        //this is where the jump problem occurs. it multiplies the jumpspeed by forcepow when jumping
-        //rb.AddRelativeForce(inputVector * forcePow);
-
-        if (Input.GetKey(KeyCode.Space))
+        rb.AddForce(transform.TransformDirection(inputVector));
+        if(rb.velocity.magnitude > maxSpeed)
         {
-            rb.AddRelativeForce(inputVector * forcePow);
+            float ySpeed = rb.velocity.y;
+            rb.velocity = rb.velocity.normalized* maxSpeed;
+            rb.velocity = new Vector3(rb.velocity.x, ySpeed, rb.velocity.z);
         }
-        else if(!Input.GetKey(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
-        {
-            rb.AddRelativeForce(inputVector * forcePow);
-        }
-        Debug.Log(inputVector*forcePow);
+       
+        //Debug.Log(inputVector*forcePow);
     }
 }
 
