@@ -17,12 +17,13 @@ public class MarioMovement : MonoBehaviour
     float jumptime = .5f;
     Rigidbody rb;
     Vector3 inputVector;
-    
+    public GameObject marioModel;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         jumptimer = jumptime;
+
     }
 
     bool isGrounded()
@@ -50,6 +51,7 @@ public class MarioMovement : MonoBehaviour
             //rotate goes between 0 and 1 multiplied by time.deltatime. multiplying by turnspeed increases turning speed
             float rotate = Input.GetAxis("Horizontal") * Time.deltaTime * turnSpeed;
             
+            
             //should rotate mario at rate of rotate
             transform.Rotate(0, rotate, 0);
 
@@ -68,6 +70,11 @@ public class MarioMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 inputVector.y = jumpSpeed;
+            }
+
+            if (inputV != 0f || rotate != 0f)
+            {
+                marioModel.transform.forward =  Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), Time.deltaTime * 5f);
             }
         }
         //if mario isn't grounded, set inputVector to 0, stops him from moving in midair
@@ -91,8 +98,9 @@ public class MarioMovement : MonoBehaviour
             float ySpeed = rb.velocity.y;
             rb.velocity = rb.velocity.normalized* maxSpeed;
             rb.velocity = new Vector3(rb.velocity.x, ySpeed, rb.velocity.z);
+
         }
-       
+        
         //Debug.Log(inputVector*forcePow);
     }
 }
