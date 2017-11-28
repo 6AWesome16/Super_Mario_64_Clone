@@ -475,15 +475,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1842446472963284}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 98.08, y: -39.93, z: 99.23}
+  m_LocalRotation: {x: -0, y: -0.3472024, z: -0, w: 0.9377903}
+  m_LocalPosition: {x: 47.08, y: -33.07, z: 13.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4086534174195752}
   - {fileID: 4928067443877418}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -40.633003, z: 0}
 --- !u!4 &4848762322390128
 Transform:
   m_ObjectHideFlags: 1
@@ -1037,8 +1037,8 @@ Rigidbody:
   m_GameObject: {fileID: 1842446472963284}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1170,7 +1170,7 @@ MonoBehaviour:
   forcePow: 60
   jumpSpeed: 300
   turnSpeed: 100
-  maxSpeed: 30
+  maxSpeed: 25
 --- !u!114 &114300831905649884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1202,7 +1202,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1842446472963284}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ed36ef34e79180948aca590575eb6948, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.01
