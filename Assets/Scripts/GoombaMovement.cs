@@ -38,7 +38,7 @@ public class GoombaMovement : MonoBehaviour {
 
 		if (myGoombaState == goombaState.walking) {
 			// always move forward if in walking state
-			transform.Translate (Time.deltaTime, 0f, 0f);
+			transform.Translate (0f, 0f, Time.deltaTime);
 			StartCoroutine (goombaWalkingCoroutine ());
 		}
 		if (myGoombaState == goombaState.turning) {
@@ -123,10 +123,11 @@ public class GoombaMovement : MonoBehaviour {
 
 		// instead it gets stuck and never stops turning towards mario
 		float t = 0f;
-		while (t < 0.5f) {
+		while (t < 1f) {
+			t += Time.deltaTime;
 			Vector3 fromGoombaToMario = mario.position - transform.position; // figure out distance between
-			Quaternion targetRotation = Quaternion.LookRotation (-fromGoombaToMario); // set target rotation
-			transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, Time.deltaTime * 4f); // rotate towards target
+			Quaternion targetRotation = Quaternion.LookRotation (fromGoombaToMario); // set target rotation
+			transform.rotation = Quaternion.Lerp (transform.rotation, targetRotation, Time.deltaTime * 5f); // rotate towards target
 			yield return 0;
 		}
 		myGoombaState = goombaState.dash;
@@ -146,9 +147,9 @@ public class GoombaMovement : MonoBehaviour {
 
 		// move forward quickly and then switch to walk state
 		float t = 0f;
-		while (t < 2f) {
+		while (t < 4f) {
 			t += Time.deltaTime;
-			transform.Translate (4 * Time.deltaTime, 0f, 0f); // dash forward
+			transform.Translate (0f, 0f, 5 * Time.deltaTime); // dash forward
 			yield return 0;
 		}
 		yield return new WaitForSeconds (2f);
