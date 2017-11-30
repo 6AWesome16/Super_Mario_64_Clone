@@ -8,6 +8,7 @@ TagManager:
   - RedCoin
   - OneUpMushroom
   - Star
+  - Ground
   layers:
   - Default
   - TransparentFX
