@@ -5,61 +5,74 @@ using UnityEngine;
 public class LakituCamera : MonoBehaviour {
 
 	float inputX;
-	float inputZ;
+	float inputY;
+	float LookAngleX;
+	float LookAngleY;
 
-	//the limits for the camera movement, can't go too far left, right, or whatever. if we want mario to have the
-	//full 360 range of camera movement that's fine too. we can always edit these values
-	int rightView = 50;
-	int leftView = 310;
-	int upView = 320;
-	int downView = 40;
+	public GameObject player;
+	Vector3 offset;
+	Vector3 PlayerRotation;
+	Quaternion rotationH, rotationV;
+	float CameraAngle;
 
-	Vector3 marioRotation;
+	void Start(){
+		offset = player.transform.position - transform.position;
+		CameraAngle = player.transform.eulerAngles.y;
+		rotationH = Quaternion.Euler (0, CameraAngle, 0);
+		rotationV = Quaternion.Euler (CameraAngle, 0, 0);
+		LookAngleX = transform.eulerAngles.y;
+		LookAngleY = transform.eulerAngles.x;
+	}
 
 	void Update () {
+		
 		//finds the rotation of the parent object of the camera 
-		marioRotation = new Vector3 (
-			transform.parent.eulerAngles.x, 
-			transform.parent.eulerAngles.y, 
-			transform.parent.eulerAngles.z); 
+		PlayerRotation = new Vector3 (
+			player.transform.eulerAngles.x, 
+			player.transform.eulerAngles.y, 
+			player.transform.eulerAngles.z); 
 
 		inputX = Input.GetAxis ("CameraHorizontal");
-		inputZ = Input.GetAxis ("CameraVertical");
+		inputY = Input.GetAxis ("CameraVertical");
 	
-		//if left or right arrow keys are being pressed OR a or d then start incrementing float inputX or Z
-		//this can be made more specific later but i wasn't sure what controls we wanted to use
+		//if left or right arrow keys are being pressed then start rotating X or Y
 		if (inputX != 0) {
 			rotateX ();
-//			if (transform.eulerAngles.y >= rightView && transform.eulerAngles.y <= leftView - 5) {
-//				transform.eulerAngles = new Vector3 (transform.eulerAngles.x, rightView, transform.eulerAngles.z);
-//			}
-//			if (transform.eulerAngles.y <= leftView && transform.eulerAngles.y > rightView + 5) {
-//				transform.eulerAngles = new Vector3 (transform.eulerAngles.x, leftView, transform.eulerAngles.z);
-//
-//			}
+			transform.position = player.transform.position - (rotationH * offset);
 		}
-		if (inputZ != 0) {
-			rotateZ ();
-//			if (transform.eulerAngles.x >= downView && transform.eulerAngles.x <= upView - 5) {
-//				transform.eulerAngles = new Vector3 (downView, transform.eulerAngles.y, transform.eulerAngles.z);
-//			}
-//			if (transform.eulerAngles.x <= upView && transform.eulerAngles.x > downView + 5) {
-//				transform.eulerAngles = new Vector3 (upView, transform.eulerAngles.y, transform.eulerAngles.z);
-//			}
+		if (inputY != 0) {
+			
+
 		}
 
-		//if no arrows are being pressed the camera will slowly pan back to its starting angle behind marios head
-		if (inputX == 0 && inputZ == 0){
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (marioRotation), Time.deltaTime * 0.8f);
+		//if no arrows are being pressed the camera will pan back to its starting angle behind marios head
+		if (inputX == 0 && inputY == 0) {
+			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (PlayerRotation), Time.deltaTime * 0.8f);
+		} else {
+			//locks the Z position of the camera
+			transform.eulerAngles = new Vector3 (
+				LookAngleY,
+				LookAngleX,
+				0);
 		}
+	}
+
+	void LateUpdate(){
+		transform.LookAt (player.transform);
+		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, 0);
 	}
 
 	//rotates the camera left and right
 	void rotateX(){
-		transform.Rotate (new Vector3 (0f, inputX * Time.deltaTime * 20f, 0f));
+		//transform.Rotate (new Vector3 (0f, inputX * Time.deltaTime * 30f, 0f));
+		LookAngleX += inputX * Time.deltaTime *20f;
 	}
 	//rotates the camera up and down
-	void rotateZ(){
-		transform.Rotate (new Vector3 (-inputZ * Time.deltaTime *20f, 0f, 0f ));
+	void rotateY(){
+		//transform.Rotate (new Vector3 (-inputY * Time.deltaTime *20f, 0f, 0f ));
+//		LookAngleY -= inputY * Time.deltaTime * 20f;
+//		LookAngleY = Mathf.Clamp (LookAngleY, -85, 85);
+
+		Debug.Log ("just checking");
 	}
 }
