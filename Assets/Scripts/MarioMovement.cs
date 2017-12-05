@@ -7,7 +7,7 @@ using UnityEngine;
 //mario's not great with hills
 public class MarioMovement : MonoBehaviour
 {
-    public float distToGround = 2f;
+    //public float distToGround = 2f;
     //forcePow is the speed mario can reach
     public float forcePow;
     public float jumpSpeed = 1f;
@@ -15,27 +15,19 @@ public class MarioMovement : MonoBehaviour
     public float maxSpeed = 30f;
     Rigidbody rb;
     Vector3 inputVector;
-    //public GameObject marioModel;
 
 	public float jumpChainTimer = 0f;  // this increases when Mario lands from a jump and ticks down over time
 									// it allows mario to do those cooool jumps
+
+	public float midAirTimer = 0f; // increases when mario is in air, for jump stuff
+
+	public bool grounded = false; // ground raycast check
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
-    }
-
-    bool isGrounded()
-    {
-        //Debug.DrawRay(transform.position, Vector3.down * distToGround,Color.cyan);
-        //return Physics.Raycast(transform.position, Vector3.down, distToGround);
-        RaycastHit marioRayHit = new RaycastHit();
-        //spherecast has origin point, radius, direction, out hit, max distance
-        //these values specifically keep mario from getting stuck on corners
-        //*please do not mess with them*
-        return Physics.SphereCast(transform.position + new Vector3(0, 1f,0), 1f, Vector3.down, out marioRayHit,distToGround);
-        //use this line of code to check for the seesaw
     }
 
     void Update()
@@ -62,40 +54,59 @@ public class MarioMovement : MonoBehaviour
 		inputVector *= forcePow;
 
         //Debug.Log(isGrounded());
-        if (isGrounded())
+		if (grounded == true)
         {
-
-
-			// unknown
-            //if (inputV != 0f || rotate != 0f)
-            //{
-                //marioModel.transform.forward =  Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), Time.deltaTime * 5f);
-            //}
-
 
 			// tick down over time
 			if (jumpChainTimer > 0f) {
 				jumpChainTimer -= Time.deltaTime;
+			}
+			if (jumpChainTimer >= 1f) {
+				jumpChainTimer = 1f;
 			}
 
 			//changes y of inputVector to jump at rate of jumpSpeed
 			if(Input.GetKeyDown(KeyCode.Space))
 			{
 				// jump chain timer less than a number, first jump happens
-				if (jumpChainTimer <= 0.5f) {
+				if (jumpChainTimer <= 0.3f) {
 					inputVector.y = jumpSpeed;
-				} else if (jumpChainTimer > 0.5f) {
-					inputVector.y = jumpSpeed * 2;
+				} else if (jumpChainTimer > 0.3f) {
+					inputVector.y = jumpSpeed * 1.5f;
+					jumpChainTimer = 0f;
 				}
 			}
 
         }
-
         //if mario isn't grounded, set inputVector to 0, stops him from moving in midair
-        if (!isGrounded())
+		else if (grounded == false)
         {
 			inputVector = new Vector3(inputVector.x, 0, inputVector.z);
+
+			midAirTimer += Time.deltaTime;
         }
+
+
+
+		// ray for groundcast
+		Ray groundedRay = new Ray(transform.position, Vector3.down);
+		float maxRayDistance = 0.6f;
+		Debug.DrawRay (groundedRay.origin, groundedRay.direction * maxRayDistance, Color.yellow);
+		RaycastHit groundRayHit = new RaycastHit ();
+
+		if (Physics.Raycast (groundedRay, maxRayDistance)) {
+			grounded = true;
+		} else {
+			grounded = false;
+		}
+
+		if (Physics.Raycast (groundedRay, out groundRayHit)) {
+			if (groundRayHit.collider.CompareTag ("Goomba")) {
+				groundRayHit.collider.GetComponent<GoombaMovement> ().goombaDeath ();
+			}
+		}
+
+
 
     }
     void FixedUpdate()
@@ -108,10 +119,7 @@ public class MarioMovement : MonoBehaviour
             float ySpeed = rb.velocity.y;
             rb.velocity = rb.velocity.normalized* maxSpeed;
             rb.velocity = new Vector3(rb.velocity.x, ySpeed, rb.velocity.z);
-
         }
-        
-        //Debug.Log(inputVector*forcePow);
     }
 
 
@@ -121,7 +129,10 @@ public class MarioMovement : MonoBehaviour
 		// manually make seesaw count as ground, please! (in tags)
 		// currently this triggers sometimes when mario is just walking
 		if (col.collider.CompareTag ("Ground")) {
-			jumpChainTimer += 2f;
+			if (midAirTimer >= 0.6f) {
+				jumpChainTimer += 0.5f;
+			}
+			midAirTimer = 0f;
 		}
 
 
