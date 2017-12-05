@@ -14,8 +14,6 @@ public class GoombaMovement : MonoBehaviour {
 
 	public Transform mario; // set in inspector
 
-	public bool marioSighted = false; // this toggles when the goombamariodiscover script notices mario
-
 	public enum goombaState{
 		walking,
 		turning,
@@ -68,16 +66,6 @@ public class GoombaMovement : MonoBehaviour {
 		yield return new WaitForSeconds (1f);
 		if (Random.Range (0, 5) == 1) {
 			myGoombaState = goombaState.turning;
-		}
-
-		// switch to alerted state if mario is seen! (from the goombamariodiscover script
-		if (marioSighted == true) {
-			// jump up
-			goombaRigidBody.velocity += new Vector3 (0f, 15f, 0f);
-
-			myGoombaState = goombaState.alerted;
-			marioSighted = false;
-			yield break;
 		}
 
 		isWalkCoroutineRunning = false;
@@ -189,6 +177,14 @@ public class GoombaMovement : MonoBehaviour {
 		if (collision.gameObject.name == "MarioFeetHitbox") {
 			myGoombaState = goombaState.dying;
 		}
+	}
+
+	public void goombaDeath(){
+		myGoombaState = goombaState.dying;
+	}
+	public void marioSighted(){
+		goombaRigidBody.velocity += new Vector3 (0f, 15f, 0f);
+		myGoombaState = goombaState.alerted;
 	}
 
 
