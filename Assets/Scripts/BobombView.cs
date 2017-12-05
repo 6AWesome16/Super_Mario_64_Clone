@@ -37,7 +37,7 @@ public class BobombView : MonoBehaviour {
 
 				if (!Physics.Raycast (transform.position, dirToMario, distToMario, obstacleMask)) {
 					transform.LookAt (mario);
-					transform.position = Vector3.MoveTowards (transform.position, mario.position, Time.deltaTime * 10);
+					transform.position = Vector3.MoveTowards (transform.position, mario.position, Time.deltaTime * 6);
 					VisibleMario.Add (mario);
 				}
 			}
