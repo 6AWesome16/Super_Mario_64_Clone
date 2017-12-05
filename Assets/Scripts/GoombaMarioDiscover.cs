@@ -12,15 +12,7 @@ public class GoombaMarioDiscover : MonoBehaviour {
 		// if i touch mario, my goomba parent sees him
 
 		if (collision.transform == mario) {
-			transform.parent.GetComponent<GoombaMovement> ().marioSighted = true;
-		}
-
-	}
-
-	void OnTriggerExit(Collider collision){
-
-		if (collision.transform == mario) {
-			transform.parent.GetComponent<GoombaMovement>().marioSighted = false;
+			transform.parent.GetComponent<GoombaMovement> ().marioSighted ();
 		}
 
 	}
