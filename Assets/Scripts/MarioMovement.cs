@@ -10,19 +10,20 @@ public class MarioMovement : MonoBehaviour
     public float distToGround = 2f;
     //forcePow is the speed mario can reach
     public float forcePow;
-    public float jumpSpeed = 8f;
+    public float jumpSpeed = 1f;
     public float turnSpeed;
     public float maxSpeed = 30f;
-    float jumptimer = .5f;
-    float jumptime = .5f;
     Rigidbody rb;
     Vector3 inputVector;
-    
+    //public GameObject marioModel;
+
+	public float jumpChainTimer = 0f;  // this increases when Mario lands from a jump and ticks down over time
+									// it allows mario to do those cooool jumps
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        jumptimer = jumptime;
+
     }
 
     bool isGrounded()
@@ -39,47 +40,63 @@ public class MarioMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(isGrounded());
+
+		//inputV goes between 0 and 1, goes up when held down, goes down when lifted
+		float inputV = Input.GetAxis("Vertical");
+		//rotate goes between 0 and 1 multiplied by time.deltatime. multiplying by turnspeed increases turning speed
+		float rotate = Input.GetAxis("Horizontal") * Time.deltaTime * turnSpeed;
+
+
+		//should rotate mario at rate of rotate
+		transform.Rotate(0, rotate, 0);
+
+		//inputVector takes inputV
+		inputVector = new Vector3(0f, 0f, inputV);
+
+		//normalizes inputVector, avoids diagonal movement exploit
+		if (inputVector.magnitude > 1f)
+		{
+			inputVector = Vector3.Normalize(inputVector);
+		}
+
+		inputVector *= forcePow;
+
+        //Debug.Log(isGrounded());
         if (isGrounded())
         {
-            jumptimer = jumptime;
 
 
-            //inputV goes between 0 and 1, goes up when held down, goes down when lifted
-            float inputV = Input.GetAxis("Vertical");
-            //rotate goes between 0 and 1 multiplied by time.deltatime. multiplying by turnspeed increases turning speed
-            float rotate = Input.GetAxis("Horizontal") * Time.deltaTime * turnSpeed;
-            
-            //should rotate mario at rate of rotate
-            transform.Rotate(0, rotate, 0);
+			// unknown
+            //if (inputV != 0f || rotate != 0f)
+            //{
+                //marioModel.transform.forward =  Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), Time.deltaTime * 5f);
+            //}
 
-            //inputVector takes inputV
-            inputVector = new Vector3(0f, 0f, inputV);
 
-            //normalizes inputVector, avoids diagonal movement exploit
-            if (inputVector.magnitude > 1f)
-            {
-                inputVector = Vector3.Normalize(inputVector);
-            }
+			// tick down over time
+			if (jumpChainTimer > 0f) {
+				jumpChainTimer -= Time.deltaTime;
+			}
 
-            inputVector *= forcePow;
+			//changes y of inputVector to jump at rate of jumpSpeed
+			if(Input.GetKeyDown(KeyCode.Space))
+			{
+				// jump chain timer less than a number, first jump happens
+				if (jumpChainTimer <= 0.5f) {
+					inputVector.y = jumpSpeed;
+				} else if (jumpChainTimer > 0.5f) {
+					inputVector.y = jumpSpeed * 2;
+				}
+			}
 
-            //changes y of inputVector to jump at rate of jumpSpeed
-            if (Input.GetKey(KeyCode.Space))
-            {
-                inputVector.y = jumpSpeed;
-            }
         }
+
         //if mario isn't grounded, set inputVector to 0, stops him from moving in midair
         if (!isGrounded())
         {
-            inputVector = new Vector3(0, 0, 0);
-            jumptimer -= .1f;
-            if(jumptimer > 0 && Input.GetKey(KeyCode.Space))
-            {
-                inputVector.y = jumpSpeed / 3f;
-            }
+			inputVector = new Vector3(inputVector.x, 0, inputVector.z);
         }
+
     }
     void FixedUpdate()
     {
@@ -91,10 +108,25 @@ public class MarioMovement : MonoBehaviour
             float ySpeed = rb.velocity.y;
             rb.velocity = rb.velocity.normalized* maxSpeed;
             rb.velocity = new Vector3(rb.velocity.x, ySpeed, rb.velocity.z);
+
         }
-       
+        
         //Debug.Log(inputVector*forcePow);
     }
+
+
+	void OnCollisionEnter (Collision col){
+
+		// if mario collides with the level, increase jump chain timer by a little bit
+		// manually make seesaw count as ground, please! (in tags)
+		// currently this triggers sometimes when mario is just walking
+		if (col.collider.CompareTag ("Ground")) {
+			jumpChainTimer += 2f;
+		}
+
+
+	}
+
 }
 
 
