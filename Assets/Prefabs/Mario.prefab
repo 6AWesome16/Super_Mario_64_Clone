@@ -11,15 +11,17 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1842446472963284}
   m_IsPrefabParent: 1
---- !u!1 &1023406314384854
+--- !u!1 &1088180819704746
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4652956836103122}
-  - component: {fileID: 95908047704342258}
+  - component: {fileID: 4116372344887748}
+  - component: {fileID: 33337207135553402}
+  - component: {fileID: 23491213841226514}
+  - component: {fileID: 95528570214167094}
   m_Layer: 0
   m_Name: marioModel
   m_TagString: Untagged
@@ -42,53 +44,6 @@ GameObject:
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1442453420448576
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4166743285540530}
-  m_Layer: 0
-  m_Name: transform7
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1500027278276914
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4619267514863762}
-  - component: {fileID: 33242149748105702}
-  - component: {fileID: 23844534994313004}
-  m_Layer: 0
-  m_Name: pSphere14
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1724658271762302
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4995106439042578}
-  m_Layer: 0
-  m_Name: pCylinder2
-  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,44 +82,16 @@ Transform:
   m_Father: {fileID: 4768476554350424}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -14.068001, z: 0}
---- !u!4 &4166743285540530
+--- !u!4 &4116372344887748
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1442453420448576}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4995106439042578}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4619267514863762
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1500027278276914}
+  m_GameObject: {fileID: 1088180819704746}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.015475059, y: 1.7880839, z: -0.02865869}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4652956836103122}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4652956836103122
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1023406314384854}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4995106439042578}
-  - {fileID: 4619267514863762}
   m_Father: {fileID: 4768476554350424}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -174,29 +101,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1842446472963284}
-  m_LocalRotation: {x: -0, y: -0.7697511, z: -0, w: 0.63834417}
-  m_LocalPosition: {x: 149.37393, y: -71.0158, z: 143.21469}
+  m_LocalRotation: {x: -0, y: -0.3472024, z: -0, w: 0.9377903}
+  m_LocalPosition: {x: 47.08, y: -33.07, z: 13.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4086534174195752}
-  - {fileID: 4652956836103122}
+  - {fileID: 4116372344887748}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 275, z: 0}
---- !u!4 &4995106439042578
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1724658271762302}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2698362, y: 0.9437161, z: -0.024452558}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4166743285540530}
-  m_Father: {fileID: 4652956836103122}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20227847196523988
 Camera:
   m_ObjectHideFlags: 1
@@ -233,12 +146,12 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!23 &23844534994313004
+--- !u!23 &23491213841226514
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1500027278276914}
+  m_GameObject: {fileID: 1088180819704746}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -265,12 +178,12 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33242149748105702
+--- !u!33 &33337207135553402
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1500027278276914}
+  m_GameObject: {fileID: 1088180819704746}
   m_Mesh: {fileID: 4300022, guid: 37fa7a0388bfd264d80ae4f5b00bb3fc, type: 3}
 --- !u!54 &54603926408060780
 Rigidbody:
@@ -398,13 +311,13 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95908047704342258
+--- !u!95 &95528570214167094
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1023406314384854}
+  m_GameObject: {fileID: 1088180819704746}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 37fa7a0388bfd264d80ae4f5b00bb3fc, type: 3}
   m_Controller: {fileID: 0}
@@ -431,7 +344,7 @@ MonoBehaviour:
   jumpSpeed: 300
   turnSpeed: 100
   maxSpeed: 25
-  marioModel: {fileID: 0}
+  marioModel: {fileID: 1088180819704746}
 --- !u!114 &114300831905649884
 MonoBehaviour:
   m_ObjectHideFlags: 1
