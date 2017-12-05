@@ -23,6 +23,28 @@ ModelImporter:
     100030: transform2
     100032: pSphere14
     100034: transform7
+    100036: joint1
+    100038: joint10
+    100040: joint11
+    100042: joint12
+    100044: joint13
+    100046: joint14
+    100048: joint15
+    100050: joint16
+    100052: joint17
+    100054: joint18
+    100056: joint19
+    100058: joint2
+    100060: joint20
+    100062: joint21
+    100064: joint22
+    100066: joint3
+    100068: joint4
+    100070: joint5
+    100072: joint6
+    100074: joint7
+    100076: joint8
+    100078: joint9
     400000: //RootNode
     400002: pCylinder1
     400004: pCylinder2
@@ -41,6 +63,28 @@ ModelImporter:
     400030: transform2
     400032: pSphere14
     400034: transform7
+    400036: joint1
+    400038: joint10
+    400040: joint11
+    400042: joint12
+    400044: joint13
+    400046: joint14
+    400048: joint15
+    400050: joint16
+    400052: joint17
+    400054: joint18
+    400056: joint19
+    400058: joint2
+    400060: joint20
+    400062: joint21
+    400064: joint22
+    400066: joint3
+    400068: joint4
+    400070: joint5
+    400072: joint6
+    400074: joint7
+    400076: joint8
+    400078: joint9
     2300000: pCylinder1
     2300002: pCylinder2
     2300004: pSphere1
@@ -80,6 +124,7 @@ ModelImporter:
     4300020: pSphere13
     4300022: pSphere14
     9500000: //RootNode
+    13700000: pSphere14
   materials:
     importMaterials: 1
     materialName: 0
