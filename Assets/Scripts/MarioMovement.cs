@@ -90,7 +90,7 @@ public class MarioMovement : MonoBehaviour
 
 		// ray for groundcast
 		Ray groundedRay = new Ray(transform.position, Vector3.down);
-		float maxRayDistance = 0.6f;
+		float maxRayDistance = 0.4f;
 		Debug.DrawRay (groundedRay.origin, groundedRay.direction * maxRayDistance, Color.yellow);
 		RaycastHit groundRayHit = new RaycastHit ();
 
