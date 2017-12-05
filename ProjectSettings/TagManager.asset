@@ -9,6 +9,7 @@ TagManager:
   - OneUpMushroom
   - Star
   - Ground
+  - Goomba
   layers:
   - Default
   - TransparentFX
