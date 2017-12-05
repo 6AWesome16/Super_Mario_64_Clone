@@ -45,6 +45,29 @@ ModelImporter:
     100074: joint7
     100076: joint8
     100078: joint9
+    100080: ankle
+    100082: ankle 1
+    100084: arm
+    100086: arm1
+    100088: center_of_grav
+    100090: elbow
+    100092: elbow 1
+    100094: foot
+    100096: foot 1
+    100098: forehead
+    100100: head
+    100102: knee
+    100104: knee 1
+    100106: leg
+    100108: leg1
+    100110: MarioBod
+    100112: neck
+    100114: shoulder
+    100116: shoulder 1
+    100118: thigh
+    100120: thigh 1
+    100122: wrist
+    100124: wrist 1
     400000: //RootNode
     400002: pCylinder1
     400004: pCylinder2
@@ -85,6 +108,29 @@ ModelImporter:
     400074: joint7
     400076: joint8
     400078: joint9
+    400080: ankle
+    400082: ankle 1
+    400084: arm
+    400086: arm1
+    400088: center_of_grav
+    400090: elbow
+    400092: elbow 1
+    400094: foot
+    400096: foot 1
+    400098: forehead
+    400100: head
+    400102: knee
+    400104: knee 1
+    400106: leg
+    400108: leg1
+    400110: MarioBod
+    400112: neck
+    400114: shoulder
+    400116: shoulder 1
+    400118: thigh
+    400120: thigh 1
+    400122: wrist
+    400124: wrist 1
     2300000: pCylinder1
     2300002: pCylinder2
     2300004: pSphere1
@@ -123,8 +169,10 @@ ModelImporter:
     4300018: pCylinder2
     4300020: pSphere13
     4300022: pSphere14
+    4300024: MarioBod
     9500000: //RootNode
     13700000: pSphere14
+    13700002: MarioBod
   materials:
     importMaterials: 1
     materialName: 0
