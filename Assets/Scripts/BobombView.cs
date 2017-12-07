@@ -5,6 +5,7 @@ using UnityEngine;
 public class BobombView : MonoBehaviour {
 
 	float WalkRotation;
+	float yPos;
 	public float ViewRadius;
 	[Range(0,360)]
 	public float ViewAngle;
@@ -16,6 +17,7 @@ public class BobombView : MonoBehaviour {
 	bool isCoroutineRunning = false;
 
 	void Start(){
+		yPos = transform.position.y;
 		if (Random.Range (0, 100) >= 50) {
 			WalkRotation = 20;
 		} else {
@@ -47,7 +49,9 @@ public class BobombView : MonoBehaviour {
 					isCoroutineRunning = true;
 					Debug.Log("is this ever happening");
 					transform.LookAt (mario);
-					transform.position = Vector3.MoveTowards (transform.position, mario.position, Time.deltaTime * 6);
+					transform.position = Vector3.MoveTowards (new Vector3(
+						transform.position.x, yPos, transform.position.z), 
+						mario.position, Time.deltaTime * 6);
 					VisibleMario.Add (mario);
 				}
 			}
