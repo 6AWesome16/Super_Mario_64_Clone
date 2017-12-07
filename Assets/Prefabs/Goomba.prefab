@@ -380,8 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b0279abae09914f8a413ecb60b7555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mario: {fileID: 0}
-  marioSighted: 0
+  mario: {fileID: 4768476554350424, guid: df966b7934cb3104b9f73f24afa25ab7, type: 2}
   myGoombaState: 0
 --- !u!114 &114426250629816136
 MonoBehaviour:
@@ -394,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c94bc16c7265694a9978a0eae111db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mario: {fileID: 0}
+  mario: {fileID: 4768476554350424, guid: df966b7934cb3104b9f73f24afa25ab7, type: 2}
 --- !u!135 &135987257402920712
 SphereCollider:
   m_ObjectHideFlags: 1
