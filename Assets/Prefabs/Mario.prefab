@@ -193,7 +193,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1443249797498844
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -203,7 +203,6 @@ GameObject:
   - component: {fileID: 92345445384050062}
   - component: {fileID: 124326024993334936}
   - component: {fileID: 81924252477834060}
-  - component: {fileID: 114539487671325408}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -236,6 +235,21 @@ GameObject:
   - component: {fileID: 4481558543164980}
   m_Layer: 0
   m_Name: knee 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1638717696112462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4988404319163238}
+  m_Layer: 0
+  m_Name: PivotObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -519,12 +533,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1443249797498844}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.54, z: -19.05}
-  m_LocalScale: {x: 1.9003536, y: 1.9003525, z: 1.9003536}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.66, z: -16.07}
+  m_LocalScale: {x: 1.9003545, y: 1.9003525, z: 1.9003545}
   m_Children: []
-  m_Father: {fileID: 4768476554350424}
-  m_RootOrder: 1
+  m_Father: {fileID: 4988404319163238}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -14.068001, z: 0}
 --- !u!4 &4443041754507012
 Transform:
@@ -670,12 +684,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1842446472963284}
-  m_LocalRotation: {x: -0, y: -0.3472024, z: -0, w: 0.9377903}
-  m_LocalPosition: {x: 47.08, y: -33.07, z: 13.55}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 149.37393, y: -70.94, z: 143.21469}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4745365041003844}
-  - {fileID: 4376530968160144}
+  - {fileID: 4988404319163238}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
@@ -776,6 +790,20 @@ Transform:
   - {fileID: 4208143301238286}
   m_Father: {fileID: 4303281994928908}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4988404319163238
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1638717696112462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4376530968160144}
+  m_Father: {fileID: 4768476554350424}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20880216475400684
 Camera:
@@ -948,7 +976,7 @@ Animator:
   m_GameObject: {fileID: 1842446472963284}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 37fa7a0388bfd264d80ae4f5b00bb3fc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb664634797340547961b56f5e316a61, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -968,7 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forcePow: 60
-  jumpSpeed: 1500
+  jumpSpeed: 25
   turnSpeed: 100
   maxSpeed: 25
   jumpChainTimer: 0
@@ -992,18 +1020,6 @@ MonoBehaviour:
   StarManager: {fileID: 1435908797395436, guid: 299074180b9dd24429982e1ef738af8f,
     type: 2}
   coin: {fileID: 8300000, guid: 706bfbac7693f15489e19398ab2c6ebf, type: 3}
---- !u!114 &114539487671325408
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1443249797498844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b5d73ac59643084cb62aab377ff31b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1842446472963284}
 --- !u!124 &124326024993334936
 Behaviour:
   m_ObjectHideFlags: 1
