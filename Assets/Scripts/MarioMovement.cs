@@ -10,7 +10,7 @@ public class MarioMovement : MonoBehaviour
     //public float distToGround = 2f;
     //forcePow is the speed mario can reach
     public float forcePow;
-    public float jumpSpeed = 1f;
+    public float jumpSpeed = 40f;
     public float turnSpeed;
     public float maxSpeed = 30f;
     Rigidbody rb;
@@ -68,11 +68,18 @@ public class MarioMovement : MonoBehaviour
 			//changes y of inputVector to jump at rate of jumpSpeed
 			if(Input.GetKeyDown(KeyCode.Space))
 			{
+				float xSpeed = rb.velocity.x;
+				float zSpeed = rb.velocity.z;
 				// jump chain timer less than a number, first jump happens
 				if (jumpChainTimer <= 0.3f) {
-					inputVector.y = jumpSpeed;
+					//inputVector.y = jumpSpeed;
+
+					transform.GetComponent<Rigidbody>().velocity = new Vector3 (xSpeed, jumpSpeed, zSpeed);
+
 				} else if (jumpChainTimer > 0.3f) {
-					inputVector.y = jumpSpeed * 1.5f;
+					//inputVector.y = jumpSpeed * 1.5f;
+					transform.GetComponent<Rigidbody>().velocity = new Vector3 (xSpeed, jumpSpeed * 1.6f, zSpeed);
+
 					jumpChainTimer = 0f;
 				}
 			}
@@ -90,7 +97,7 @@ public class MarioMovement : MonoBehaviour
 
 		// ray for groundcast
 		Ray groundedRay = new Ray(transform.position, Vector3.down);
-		float maxRayDistance = 0.4f;
+		float maxRayDistance = 2f;
 		Debug.DrawRay (groundedRay.origin, groundedRay.direction * maxRayDistance, Color.yellow);
 		RaycastHit groundRayHit = new RaycastHit ();
 
@@ -120,6 +127,15 @@ public class MarioMovement : MonoBehaviour
             rb.velocity = rb.velocity.normalized* maxSpeed;
             rb.velocity = new Vector3(rb.velocity.x, ySpeed, rb.velocity.z);
         }
+
+		if (grounded == true) {
+			// check if no directional buttons are pressed
+			if (inputVector == new Vector3 (0f, 0f, 0f)) {
+				float ySpeed = rb.velocity.y;
+				rb.velocity -= new Vector3 (rb.velocity.x / 1.1f, 0f, rb.velocity.z / 1.1f);
+			}
+		}
+
     }
 
 
@@ -129,8 +145,8 @@ public class MarioMovement : MonoBehaviour
 		// manually make seesaw count as ground, please! (in tags)
 		// currently this triggers sometimes when mario is just walking
 		if (col.collider.CompareTag ("Ground")) {
-			if (midAirTimer >= 0.6f) {
-				jumpChainTimer += 0.5f;
+			if (midAirTimer >= 0.5f && midAirTimer <= 1.2f) {
+					jumpChainTimer += 0.8f;
 			}
 			midAirTimer = 0f;
 		}
