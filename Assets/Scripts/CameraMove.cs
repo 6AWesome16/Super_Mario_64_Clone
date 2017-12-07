@@ -41,7 +41,7 @@ public class CameraMove : MonoBehaviour {
 		if (Physics.Raycast (ray, out hit)) {
 			yLowerbound = hit.point.y + 1;
 		}
-		transform.position = new Vector3 (transform.position.x, Mathf.Clamp(transform.position.y, yLowerbound, player.transform.position.y + 6), transform.position.z);
+		transform.position = new Vector3 (transform.position.x, Mathf.Clamp(transform.position.y, yLowerbound -2, player.transform.position.y + 6), transform.position.z);
 	}
 }
 //Vector3.Cross(transform.position - new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z), player.transform.up)
