@@ -16,6 +16,8 @@ public class MarioMovement : MonoBehaviour
     Rigidbody rb;
     Vector3 inputVector;
 
+    Animator myAnimator;
+
 	public float jumpChainTimer = 0f;  // this increases when Mario lands from a jump and ticks down over time
 									// it allows mario to do those cooool jumps
 
@@ -27,7 +29,7 @@ public class MarioMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        myAnimator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -56,7 +58,15 @@ public class MarioMovement : MonoBehaviour
         //Debug.Log(isGrounded());
 		if (grounded == true)
         {
-
+            //if arrow keys pressed set running to true
+            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            {
+                myAnimator.SetBool("isRunning", true);
+            }
+            else
+            {
+                myAnimator.SetBool("isRunning", false);
+            }
 			// tick down over time
 			if (jumpChainTimer > 0f) {
 				jumpChainTimer -= Time.deltaTime;
@@ -68,6 +78,9 @@ public class MarioMovement : MonoBehaviour
 			//changes y of inputVector to jump at rate of jumpSpeed
 			if(Input.GetKeyDown(KeyCode.Space))
 			{
+                //set jumping animation to true
+
+
 				float xSpeed = rb.velocity.x;
 				float zSpeed = rb.velocity.z;
 				// jump chain timer less than a number, first jump happens
