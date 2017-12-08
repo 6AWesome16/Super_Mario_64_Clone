@@ -59,7 +59,7 @@ public class MarioMovement : MonoBehaviour
 		if (grounded == true)
         {
             //if arrow keys pressed set running to true
-            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            if (Input.GetAxis("Vertical") != 0)
             {
                 myAnimator.SetBool("isRunning", true);
             }
