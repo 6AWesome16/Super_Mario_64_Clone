@@ -58,6 +58,7 @@ public class MarioMovement : MonoBehaviour
         //Debug.Log(isGrounded());
 		if (grounded == true)
         {
+            myAnimator.SetBool("isJumping", false);
             //if arrow keys pressed set running to true
             if (Input.GetAxis("Vertical") != 0)
             {
@@ -78,10 +79,11 @@ public class MarioMovement : MonoBehaviour
 			//changes y of inputVector to jump at rate of jumpSpeed
 			if(Input.GetKeyDown(KeyCode.Space))
 			{
-                //set jumping animation to true
+
+                //myAnimator.SetBool("isJumping", true);
 
 
-				float xSpeed = rb.velocity.x;
+                float xSpeed = rb.velocity.x;
 				float zSpeed = rb.velocity.z;
 				// jump chain timer less than a number, first jump happens
 				if (jumpChainTimer <= 0.3f) {
@@ -101,7 +103,12 @@ public class MarioMovement : MonoBehaviour
         //if mario isn't grounded, set inputVector to 0, stops him from moving in midair
 		else if (grounded == false)
         {
-			inputVector = new Vector3(inputVector.x, 0, inputVector.z);
+            //set jumping animation to true
+            //makes jump animation last for whole jump, but if standing still
+            //causes jump animation to reactivate for an instant on landing
+            myAnimator.SetBool("isJumping", true);
+
+            inputVector = new Vector3(inputVector.x, 0, inputVector.z);
 
 			midAirTimer += Time.deltaTime;
         }
@@ -116,7 +123,9 @@ public class MarioMovement : MonoBehaviour
 
 		if (Physics.Raycast (groundedRay, maxRayDistance)) {
 			grounded = true;
-		} else {
+
+        }
+        else {
 			grounded = false;
 		}
 
