@@ -58,8 +58,9 @@ public class MarioMovement : MonoBehaviour
         //Debug.Log(isGrounded());
 		if (grounded == true)
         {
+            myAnimator.SetBool("isJumping", false);
             //if arrow keys pressed set running to true
-            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            if (Input.GetAxis("Vertical") != 0)
             {
                 myAnimator.SetBool("isRunning", true);
             }
@@ -78,10 +79,11 @@ public class MarioMovement : MonoBehaviour
 			//changes y of inputVector to jump at rate of jumpSpeed
 			if(Input.GetKeyDown(KeyCode.Space))
 			{
-                //set jumping animation to true
+                //causes animation to run, but finish midair as transitions back to idle
+                //myAnimator.SetBool("isJumping", true);
 
 
-				float xSpeed = rb.velocity.x;
+                float xSpeed = rb.velocity.x;
 				float zSpeed = rb.velocity.z;
 				// jump chain timer less than a number, first jump happens
 				if (jumpChainTimer <= 0.3f) {
@@ -101,22 +103,31 @@ public class MarioMovement : MonoBehaviour
         //if mario isn't grounded, set inputVector to 0, stops him from moving in midair
 		else if (grounded == false)
         {
-			inputVector = new Vector3(inputVector.x, 0, inputVector.z);
+            //set jumping animation to true
+            //makes jump animation last for whole jump, but if standing still
+            //causes jump animation to reactivate for an instant on landing
+            //myAnimator.SetBool("isJumping", true);
+
+            inputVector = new Vector3(inputVector.x, 0, inputVector.z);
 
 			midAirTimer += Time.deltaTime;
+            myAnimator.SetBool("isJumping", true);
+
         }
 
 
 
-		// ray for groundcast
-		Ray groundedRay = new Ray(transform.position, Vector3.down);
+        // ray for groundcast
+        Ray groundedRay = new Ray(transform.position, Vector3.down);
 		float maxRayDistance = 2f;
 		Debug.DrawRay (groundedRay.origin, groundedRay.direction * maxRayDistance, Color.yellow);
 		RaycastHit groundRayHit = new RaycastHit ();
 
 		if (Physics.Raycast (groundedRay, maxRayDistance)) {
 			grounded = true;
-		} else {
+
+        }
+        else {
 			grounded = false;
 		}
 
