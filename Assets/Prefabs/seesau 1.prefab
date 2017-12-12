@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 23419310904898956}
   - component: {fileID: 95739186814613204}
   - component: {fileID: 54961910091409830}
+  - component: {fileID: 64704214714545874}
   m_Layer: 0
   m_Name: seesauFulchrum
   m_TagString: Untagged
@@ -84,15 +85,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1467595737438448}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.611076, y: -35.712803, z: 24.771317}
+  m_LocalRotation: {x: -0, y: 0.011918596, z: -0, w: 0.999929}
+  m_LocalPosition: {x: 79.1, y: -66, z: 69.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4281539592535704}
   - {fileID: 4488747196530340}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 1.366, z: 0}
 --- !u!4 &4488747196530340
 Transform:
   m_ObjectHideFlags: 1
@@ -214,6 +215,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!64 &64704214714545874
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1773065126026142}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: c15736cc9eff9c642bcd63d78daafbd8, type: 3}
 --- !u!65 &65196230183245596
 BoxCollider:
   m_ObjectHideFlags: 1
