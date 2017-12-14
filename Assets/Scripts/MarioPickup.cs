@@ -58,6 +58,8 @@ public class MarioPickup : MonoBehaviour {
 		if (col.CompareTag ("Star")) {
 			Destroy (col.gameObject);
 			StarManager.GetComponent<NumberText> ().AddScore (1);
+			GameObject.Find ("MusicManager").GetComponent<AudioSource> ().clip = GameObject.Find ("MusicManager").GetComponent<MusicManager>().StarMusic;
+			GameObject.Find ("MusicManager").GetComponent<MusicManager>().BGM.Play();
 			//insert whatever happens when a red coin is obtained
 		}
 
