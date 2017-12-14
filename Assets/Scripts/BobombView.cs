@@ -14,29 +14,20 @@ public class BobombView : MonoBehaviour {
 	public LayerMask obstacleMask;
 
 	public List<Transform> VisibleMario = new List<Transform>();
-	bool isCoroutineRunning = false;
+	bool isChasingMario = false;
 
 	void Start(){
 		yPos = transform.position.y;
 		if (Random.Range (0, 100) >= 50) {
-			WalkRotation = 20;
+			WalkRotation = 1;
 		} else {
-			WalkRotation = -20;
-		}
-		StartCoroutine ("FindMarioWithDelay", 0f);
-	}
-
-	IEnumerator FindMarioWithDelay(float delay){
-		while (true) {
-			yield return new WaitForSeconds (delay);
-			FindMario ();
-
+			WalkRotation = -1;
 		}
 	}
 
 	void FindMario(){
 		VisibleMario.Clear ();
-		isCoroutineRunning = false;
+		isChasingMario = false;
 		Collider[] MarioInViewRadius = Physics.OverlapSphere (transform.position, ViewRadius, marioMask);
 
 		for (int i = 0; i < MarioInViewRadius.Length; i++) {
@@ -46,28 +37,40 @@ public class BobombView : MonoBehaviour {
 				float distToMario = Vector3.Distance (transform.position, mario.position);
 
 				if (!Physics.Raycast (transform.position, dirToMario, distToMario, obstacleMask)) {
-					isCoroutineRunning = true;
+					isChasingMario = true;
 					Debug.Log("is this ever happening");
+
+
 					transform.LookAt (mario);
-					transform.position = Vector3.MoveTowards (new Vector3(
-						transform.position.x, yPos, transform.position.z), 
-						mario.position, Time.deltaTime * 6);
+					transform.GetComponent<Rigidbody> ().velocity = 
+						(mario.transform.position - transform.position).normalized * Time.deltaTime * 600;
+//					transform.position = Vector3.MoveTowards (new Vector3(
+//						transform.position.x, yPos, transform.position.z), 
+//						mario.position, Time.deltaTime * 6);
 					VisibleMario.Add (mario);
 				}
 			}
 		}
 	}
 
-	void Update(){
-		if (!isCoroutineRunning) {
-			transform.position += transform.forward * Time.deltaTime * 6;
-			transform.eulerAngles = new Vector3(
-				transform.eulerAngles.x,
-				(transform.eulerAngles.y + WalkRotation * Time.deltaTime), 
-				0);
+	void walkInCircle(){
+		transform.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		transform.Translate (Vector3.forward * Time.deltaTime * 6);
+		//transform.rotation = Quaternion.LookRotation (-Vector3.forward);
+		transform.eulerAngles = new Vector3(
+			transform.eulerAngles.x,
+			(transform.eulerAngles.y + WalkRotation ), 
+			0);
+	}
+
+	void Update() {
+		FindMario (); // will set isChasingMario to true or false
+
+		if (!isChasingMario) {
+			walkInCircle ();
 		}
 	}
-		
+
 	public Vector3 DirFromAngle (float AngleDegrees, bool AngleIsGlobal){
 		if (!AngleIsGlobal) {
 			AngleDegrees += transform.eulerAngles.y;
