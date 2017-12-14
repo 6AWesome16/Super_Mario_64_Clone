@@ -1017,8 +1017,7 @@ MonoBehaviour:
     type: 2}
   LifeManager: {fileID: 1207600930891974, guid: 299074180b9dd24429982e1ef738af8f,
     type: 2}
-  StarManager: {fileID: 1435908797395436, guid: 299074180b9dd24429982e1ef738af8f,
-    type: 2}
+  StarManager: {fileID: 0}
   coin: {fileID: 8300000, guid: 706bfbac7693f15489e19398ab2c6ebf, type: 3}
 --- !u!124 &124326024993334936
 Behaviour:
