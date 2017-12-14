@@ -5,6 +5,7 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour {
 
 	public AudioSource BGM;
+	public AudioClip StarMusic;
 
 /// <summary>
 	// This music script will be adjusted as we continue to make progress!  For now this is the basic script that we have.
