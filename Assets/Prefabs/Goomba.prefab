@@ -151,7 +151,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2804fe04e319bc844b09c7dc5ccee962, type: 2}
+  - {fileID: 2100000, guid: cdf2e1aef0f0404488b820f57e06a14a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -280,7 +280,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.46, y: 1.68, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95711131510563116
 Animator:
