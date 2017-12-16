@@ -2593,6 +2593,20 @@ Prefab:
       propertyPath: turnSpeed
       value: 110
       objectReference: {fileID: 0}
+    - target: {fileID: 114300831905649884, guid: df966b7934cb3104b9f73f24afa25ab7,
+        type: 2}
+      propertyPath: mush
+      value: 
+      objectReference: {fileID: 8300000, guid: 02c2f61c11d5f2043b60cc1fa4e8f375, type: 3}
+    - target: {fileID: 114095126234907884, guid: df966b7934cb3104b9f73f24afa25ab7,
+        type: 2}
+      propertyPath: jump
+      value: 
+      objectReference: {fileID: 8300000, guid: 70e54e59df800994dbc501c7e0d705c0, type: 3}
+    - target: {fileID: 1443249797498844, guid: df966b7934cb3104b9f73f24afa25ab7, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df966b7934cb3104b9f73f24afa25ab7, type: 2}
   m_IsPrefabParent: 0

@@ -10,6 +10,7 @@ public class MarioPickup : MonoBehaviour {
 	public GameObject StarManager;
 
 	public AudioClip coin;
+	public AudioClip mush;
 
 /// <summary>
 	// Mario picks lots of stuff up using this script.
@@ -37,8 +38,6 @@ public class MarioPickup : MonoBehaviour {
 	void OnTriggerEnter (Collider col) {
 		if (col.CompareTag ("YellowCoin")) {
 			AudioSource ourAudio = GetComponent<AudioSource> ();
-
-			//Right now Mario's Audio Source controls the coin sound. That's weird.
 			ourAudio.PlayOneShot (coin);
 			Destroy (col.gameObject);
 			gm.ActualCoinValue += 1;
@@ -50,6 +49,8 @@ public class MarioPickup : MonoBehaviour {
 		}
 
 		if (col.CompareTag ("OneUpMushroom")) {
+			AudioSource ourAudio = GetComponent<AudioSource> ();
+			ourAudio.PlayOneShot (mush);
 			Destroy (col.gameObject);
 			gm.LifeCount += 1;
 			LifeManager.GetComponent<NumberText> ().AddScore (1);
@@ -60,7 +61,6 @@ public class MarioPickup : MonoBehaviour {
 			StarManager.GetComponent<NumberText> ().AddScore (1);
 			GameObject.Find ("MusicManager").GetComponent<AudioSource> ().clip = GameObject.Find ("MusicManager").GetComponent<MusicManager>().StarMusic;
 			GameObject.Find ("MusicManager").GetComponent<MusicManager>().BGM.Play();
-			//insert whatever happens when a red coin is obtained
 		}
 
 		//Other types of objects can be tagged using this script
