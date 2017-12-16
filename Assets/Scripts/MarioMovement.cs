@@ -18,6 +18,8 @@ public class MarioMovement : MonoBehaviour
 
     Animator myAnimator;
 
+	public AudioClip jump;
+
 	public float jumpChainTimer = 0f;  // this increases when Mario lands from a jump and ticks down over time
 									// it allows mario to do those cooool jumps
 
@@ -90,10 +92,14 @@ public class MarioMovement : MonoBehaviour
 					//inputVector.y = jumpSpeed;
 
 					transform.GetComponent<Rigidbody>().velocity = new Vector3 (xSpeed, jumpSpeed, zSpeed);
+					AudioSource ourAudio = GetComponent<AudioSource> ();
+					ourAudio.PlayOneShot (jump);
 
 				} else if (jumpChainTimer > 0.3f) {
 					//inputVector.y = jumpSpeed * 1.5f;
 					transform.GetComponent<Rigidbody>().velocity = new Vector3 (xSpeed, jumpSpeed * 1.6f, zSpeed);
+					AudioSource ourAudio = GetComponent<AudioSource> ();
+					ourAudio.PlayOneShot (jump);
 
 					jumpChainTimer = 0f;
 				}
